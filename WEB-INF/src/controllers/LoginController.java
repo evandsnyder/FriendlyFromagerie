@@ -1,12 +1,12 @@
 package controllers;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
 import domain.LoginBean;
+import domain.UserBean;
+import managers.LoginManager;
 
 public class LoginController extends HttpServlet 
 {
@@ -17,25 +17,17 @@ public class LoginController extends HttpServlet
 	{
 		LoginBean loginBean = new LoginBean(request.getParameter("username"), request.getParameter("password"));
 		
-		response.setContentType("text/html");
-		
-		PrintWriter out = response.getWriter();
-		out.print("<html>");
-		out.print("<head><title>Friendly Fromagerie Login</title></head>");
-		out.print("<body>");
+		UserBean user = (new LoginManager()).authenticate(loginBean);
+		String forwardDestination = "/error";
 		
 		
-		if(authenticate(loginBean)) {
-			out.print("<h1>Hello admin!</h1>");
+		if(user != null) {
+			request.getSession().setAttribute("user", user);
+			forwardDestination = "/home";
 		} else {
-			out.print("<h1>Incorrect username or password</h1>");
+			request.setAttribute("error-msg", "The credentials you entered were invalid");
 		}
 		
-		out.print("</body>");
-		out.print("</html>");
-	}
-	
-	private boolean authenticate(LoginBean login) {
-		return login.getUsername().equals("admin") && login.getPassword().equals("password");
+		getServletContext().getRequestDispatcher(forwardDestination).forward(request, response);
 	}
 }

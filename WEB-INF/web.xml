@@ -10,7 +10,19 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
   </servlet>
   <servlet>
     <servlet-name>editCheeseRecipe</servlet-name>
-    <servlet-class>controllers.CreateEditCheeseRecipeController</servlet-class>
+    <servlet-class>controllers.EditCheeseRecipeController</servlet-class>
+ </servlet>
+ <servlet>
+    <servlet-name>home</servlet-name>
+    <servlet-class>presentation.HomeServlet</servlet-class>
+ </servlet>
+ <servlet>
+    <servlet-name>error</servlet-name>
+    <servlet-class>presentation.ErrorServlet</servlet-class>
+ </servlet>
+ <servlet>
+    <servlet-name>cheeseRecipeSaved</servlet-name>
+    <servlet-class>presentation.RecipeSavedServlet</servlet-class>
  </servlet>
 
  <servlet-mapping>
@@ -20,5 +32,17 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
   <servlet-mapping>
     <servlet-name>editCheeseRecipe</servlet-name>
     <url-pattern>/editCheese</url-pattern>
-  </servlet-mapping>  
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>home</servlet-name>
+    <url-pattern>/home</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+    <servlet-name>error</servlet-name>
+    <url-pattern>/error</url-pattern>
+ </servlet-mapping> 
+ <servlet-mapping>
+    <servlet-name>cheeseRecipeSaved</servlet-name>
+    <url-pattern>/recipeSaved</url-pattern>
+ </servlet-mapping> 
 </web-app>
