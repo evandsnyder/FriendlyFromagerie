@@ -1,0 +1,71 @@
+<html>
+<head>
+<title>Edit Cheese Recipe</title>
+</head>
+<body>
+<h1>Edit Cheese Recipe</h1>
+<form action="editCheese" method="post">
+<label for="publish">Make Public?</label><input type="checkbox" name="publish" id="publish"/><br />
+
+<label for="cheese-type">Type of Cheese:</label>
+<select id="cheese-type" name="cheese-type">
+	<option value="BRIE">Brie</option>
+	<option value="CHEDDAR">Cheddar</option>
+	<option value="MOZZARELLA">Mozzarella</option>
+	<option value="PROVOLONE">Provolone</option>
+	<option value="CHEVRE">Chevre</option>
+	<option value="FETA">Feta</option>
+	<option value="LABNEH">Labneh</option>
+	<option value="MANCHEGO">Manchego</option>
+</select><br />
+
+<label for="hardness">Hardness:</label>
+<select id="hardness" name="hardness">
+	<option value="HARD">Hard</option>
+	<option value="SEMISOFT">Semi-soft</option>
+	<option value="SOFT">Soft</option>
+</select><br />
+
+<label for="milk-type">Milk Type:</label>
+<select id="milk-type" name="milk-type">
+	<option value="COW">Cow Milk</option>
+	<option value="GOAT">Goat Milk</option>
+	<option value="SHEEP">Sheep Milk</option>
+</select><br />
+
+<label for="ingredients">Ingredients:</label><br />
+<textarea id="ingredients" name="ingredients" rows="10" cols="50">
+</textarea><br />
+
+<label for="warm-the-milk">Warm the Milk:</label><br />
+<textarea id="warm-the-milk" name="warm-the-milk" rows="10" cols="50">
+</textarea><br />
+
+<label for="culture-coagulate">Culture the Milk and Coagulate:</label><br />
+<textarea id="culture-coagulate" name="culture-coagulate" rows="10" cols="50">
+</textarea><br />
+
+<label for="ladle-curd">Ladle the Curd:</label><br />
+<textarea id="ladle-curd" name="ladle-curd" rows="10" cols="50">
+</textarea><br />
+
+<label for="drain-curd">Drain the Curd:</label><br />
+<textarea id="drain-curd" name="drain-curd" rows="10" cols="50">
+</textarea><br />
+
+<label for="target-flavor-texture">Target Flavor and Texture:</label><br />
+<textarea id="target-flavor-texture" name="target-flavor-texture" rows="10" cols="50">
+</textarea><br />
+
+<label for="storage">Storage:</label><br />
+<textarea id="storage" name="storage" rows="10" cols="50">
+</textarea><br />
+
+<label for="notes">Additional Notes:</label><br />
+<textarea id="notes" name="notes" rows="10" cols="50">
+</textarea><br />
+
+<input type="submit" value="Submit"/>
+</form>
+</body>
+</html>
