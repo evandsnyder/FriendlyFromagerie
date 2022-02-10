@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>Login</title>
+    <link th:href="@{/css/signin.css}" rel="stylesheet">
+</head>
+<body class="text-center">
+<div layout:fragment="content" class="signin-form">
+    <main class="form-signin">
+        <form th:action="@{/register}" th:object="${registrationform}" method="post">
+            <h1 class="h3 mb-3 fw-normal">Register</h1>
+
+            <div class="form-floating">
+                <input type="text" class="form-control" id="user-name-label"
+                       name="username" placeholder="Username"> <label
+                    for="user-name-label">Username</label>
+            </div>
+            <div class="form-floating">
+                <input type="text" class="form-control" id="first-name-label"
+                       name="username" placeholder="Username"> <label
+                    for="first-name-label">First Name</label>
+            </div>
+            <div class="form-floating">
+                <input type="text" class="form-control" id="last-name-label"
+                       name="username" placeholder="Username"> <label
+                    for="last-name-label">Last Name</label>
+            </div>
+            <div class="form-floating">
+                <input type="text" class="form-control" id="email-label"
+                       name="username" placeholder="Username"> <label
+                    for="email-label">Email</label>
+            </div>
+            <div class="form-floating">
+                <input type="text" class="form-control" id="phone-number-label"
+                       name="username" placeholder="Username"> <label
+                    for="phone-number-label">Phone Number</label>
+            </div>
+            <div class="form-floating">
+                <input type="password" class="form-control" id="password-label"
+                       name="password" placeholder="Password"> <label
+                    for="password-label">Password</label>
+            </div>
+            <div class="form-floating">
+                <input type="password" class="form-control" id="confirm-password-label"
+                       name="password" placeholder="Password"> <label
+                    for="confirm-password-label">Password</label>
+            </div>
+            <button class="w-100 btn btn-lg btn-primary" type="submit">Sign
+                in</button>
+        </form>
+    </main>
+</div>
+
+</body>
+</html>

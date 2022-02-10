@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.friendlygeek.friendlyfromagerie.domain.User;
+import com.friendlygeek.friendlyfromagerie.domain.models.User;
 
 @Controller
 public class HomeController extends BaseController {

@@ -1,10 +1,10 @@
-package com.friendlygeek.friendlyfromagerie.domain;
+package com.friendlygeek.friendlyfromagerie.domain.dtos;
 
-public class Login {
+public class LoginRequest {
 	private String username;
 	private String password;
 	
-	public Login(String username, String password) {
+	public LoginRequest(String username, String password) {
 		this.username = username;
 		this.password = password;
 	}
