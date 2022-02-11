@@ -14,8 +14,8 @@ public class UserService {
 
 	public User authenticate(LoginRequest loginRequest) {
 		User user = repository.getUsers().findFirstByUsernameOrEmail(loginRequest.getUsername());
+		if(user == null) return null;
 		return user.getPassword().equals(loginRequest.getPassword()) ? user : null;
-
 	}
 
 	public User register(RegisterRequest registerRequest){

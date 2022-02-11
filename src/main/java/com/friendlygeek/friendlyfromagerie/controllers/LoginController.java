@@ -27,6 +27,17 @@ public class LoginController extends BaseController {
 
     @PostMapping("/login")
     public ModelAndView postLoginPage(@ModelAttribute(name = "loginForm") LoginRequest loginRequest, HttpSession session, Model model) {
+    	if(loginRequest == null) {
+    		System.err.println("loginRequest is null!");
+    		ModelAndView mav = new ModelAndView("error");
+    		return mav;
+    	}
+    	if(userService == null) {
+    		System.err.println("suer service is null!");
+    		ModelAndView mav = new ModelAndView("error");
+    		return mav;
+    	}
+    	
         User user = userService.authenticate(loginRequest);
 
         if (user != null) {

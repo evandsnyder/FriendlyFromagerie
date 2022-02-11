@@ -13,8 +13,9 @@ public class GlobalExceptionHandlingControllerAdvice {
 	
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	@ExceptionHandler(Exception.class)
-	public ModelAndView internalServerError() {
-		ModelAndView mav = new ModelAndView();
+	public ModelAndView internalServerError(Exception e) {
+		e.printStackTrace();
+		ModelAndView mav = new ModelAndView();		
 		mav.addObject("message", "An error occured on our end!");
 		mav.setViewName("error");
 		return mav;

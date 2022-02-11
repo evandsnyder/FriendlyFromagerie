@@ -5,7 +5,6 @@ import com.friendlygeek.friendlyfromagerie.repository.RepositoryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -31,8 +30,8 @@ public class RecipeService {
 				&& !recipe.getStorage().isEmpty();
 	}
 
-	public List<CheeseRecipe> getAllRecipes(){
-		return repository.getRecipes().getAllRecipes();
+	public Iterable<CheeseRecipe> getAllRecipes(){
+		return repository.getRecipes().findAll();
 	}
 
 	public Optional<CheeseRecipe> getRecipe(Integer id){

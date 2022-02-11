@@ -47,19 +47,6 @@ public class CheeseRecipeController extends BaseController {
         return mav;
     }
 
-    @GetMapping("/cheese/{recipeId}")
-    public ModelAndView getRecipeById(@PathVariable Integer recipeId, HttpSession session, Model model) {
-        if (!isLoggedIn(session)) {
-            return new ModelAndView("redirect:/login");
-        }
-
-        recipeService.getAllRecipes();
-        ModelAndView mav = new ModelAndView("cheeseview");
-        mav.addObject("recipe", model.getAttribute("recipe"));
-
-        return mav;
-    }
-
     @GetMapping("/cheese/edit")
     public ModelAndView getEditRecipe(HttpSession session, Model model) {
         if (!isLoggedIn(session)) {
