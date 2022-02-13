@@ -22,53 +22,68 @@ import java.util.Optional;
 
 @Controller
 public class CheeseRecipeController extends BaseController {
-    @Autowired
-    private RecipeService recipeService;
+	@Autowired
+	private RecipeService recipeService;
+	
+	@GetMapping("/cheese/{recipeId}")
+	public ModelAndView getCheeseRecipes(@PathVariable(required = false) Integer recipeId, HttpServletRequest request,
+			HttpServletResponse response, Model model) throws NoHandlerFoundException {
+		if (!isLoggedIn(request.getSession())) {
+			return new ModelAndView("redirect:/login");
+		}
 
-    @GetMapping({"/cheese", "/cheese/{recipeId}"})
-    public ModelAndView getCheeseRecipes(@PathVariable Integer recipeId, HttpServletRequest request, HttpServletResponse response, Model model) throws NoHandlerFoundException {
-        if (!isLoggedIn(request.getSession())) {
-            return new ModelAndView("redirect:/login");
-        }
+		ModelAndView mav = new ModelAndView("cheeseview");
 
-        ModelAndView mav = new ModelAndView("cheeseview");
+		if (recipeId != null) {
+			Optional<CheeseRecipe> recipe = recipeService.getRecipe(recipeId);
+			if (!recipe.isPresent()) {
+				throw new ResourceNotFoundException();
+			}
 
-        if (recipeId != null) {
-            Optional<CheeseRecipe> recipe = recipeService.getRecipe(recipeId);
-            if (!recipe.isPresent()) {
-                throw new ResourceNotFoundException();
-            }
+			mav.addObject("recipe", recipe.get());
+		} else {
+			mav.addObject("recipes", recipeService.getAllRecipes());
+		}
 
-            mav.addObject("recipes", recipe.get());
-        } else {
-            mav.addObject("recipes", recipeService.getAllRecipes());
-        }
+		return mav;
+	}
 
-        return mav;
-    }
+	@GetMapping({"/cheese/edit" ,"/cheese/edit/{recipeId}"})
+	public ModelAndView getEditRecipe(@PathVariable(required = false) Integer recipeId, HttpSession session,
+			Model model) {
+		if (!isLoggedIn(session)) {
+			return new ModelAndView("redirect:/login");
+		}
 
-    @GetMapping("/cheese/edit")
-    public ModelAndView getEditRecipe(HttpSession session, Model model) {
-        if (!isLoggedIn(session)) {
-            return new ModelAndView("redirect:/login");
-        }
-        return new ModelAndView("editcheese");
-    }
+		ModelAndView mav = new ModelAndView("editcheese");
 
-    @PostMapping("/cheese/edit")
-    public ModelAndView saveRecipe(@ModelAttribute(name = "recipeForm") CheeseRecipe recipe, HttpSession session, Model model) {
-        if (!isLoggedIn(session)) {
-            return new ModelAndView("redirect:/login");
-        }
+		if (recipeId != null) {
+			Optional<CheeseRecipe> recipe = recipeService.getRecipe(recipeId);
+			if (!recipe.isPresent()) {
+				throw new ResourceNotFoundException();
+			}
 
-        ModelAndView result = new ModelAndView();
-        result.setViewName("/cheese/edit");
+			mav.addObject("recipe", recipe.get());
+		}
 
-        if ((new RecipeService()).isValidRecipe(recipe)) {
-            result.setViewName("redirect:/cheese");
-            result.addObject("recipe", recipe);
-        }
+		return mav;
+	}
 
-        return result;
-    }
+	@PostMapping({"/cheese/edit" ,"/cheese/edit/{recipeId}"})
+	public ModelAndView saveRecipe(@PathVariable(required = false) Integer recipeId,
+			@ModelAttribute(name = "recipeForm") CheeseRecipe recipe, HttpSession session, Model model) {
+		if (!isLoggedIn(session)) {
+			return new ModelAndView("redirect:/login");
+		}
+
+		ModelAndView result = new ModelAndView();
+		result.setViewName("redirect:/cheese/edit");
+
+		if (recipeService.isValidRecipe(recipe)) {
+			CheeseRecipe newRecipe = recipeService.saveRecipe(recipe);
+			result.setViewName("redirect:/cheese/" + newRecipe.getId().toString());
+		}
+
+		return result;
+	}
 }

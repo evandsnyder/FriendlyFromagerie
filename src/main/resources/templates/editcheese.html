@@ -13,84 +13,91 @@
 			<form th:action="@{/cheese/edit}" th:object="${recipeForm}"
 				method="post">
 				<h1 class="h3 mb-3 fw-normal">Edit Recipe</h1>
+				<input type="hidden" th:value="${recipe?.id}" id="id" name="id"/>
 				<div class="mb-3">
-					<label for="publish">Make Public?</label> <input type="checkbox"
-						name="publish" id="publish" />
+					<label for="recipeName">Recipe Name: </label> <input type="text"
+						name="recipeName" id="recipeName" th:value="${recipe?.recipeName}"/>
+				</div>
+				<div class="mb-3">
+					<label for="description">Description:</label>
+					<textarea class="form-control" id="description" name="description"
+						rows="10" cols="50" th:text="${recipe?.description}">
+</textarea>
 				</div>
 				<div class="mb-3">
 					<label for="cheese-type">Type of Cheese:</label> <select
 						id="cheese-type" name="cheeseType" class="form-select">
-						<option value="BRIE">Brie</option>
-						<option value="CHEDDAR">Cheddar</option>
-						<option value="MOZZARELLA">Mozzarella</option>
-						<option value="PROVOLONE">Provolone</option>
-						<option value="CHEVRE">Chevre</option>
-						<option value="FETA">Feta</option>
-						<option value="LABNEH">Labneh</option>
-						<option value="MANCHEGO">Manchego</option>
+						<option value="BRIE" th:selected="${recipe?.cheeseType == 'BRIE'}">Brie</option>
+						<option value="CHEDDAR" th:selected="${recipe?.cheeseType == 'CHEDDAR'}">Cheddar</option>
+						<option value="MOZZARELLA" th:selected="${recipe?.cheeseType == 'MOZZARELLA'}">Mozzarella</option>
+						<option value="PROVOLONE" th:selected="${recipe?.cheeseType == 'PROVOLONE'}">Provolone</option>
+						<option value="CHEVRE" th:selected="${recipe?.cheeseType == 'CHEVRE'}">Chevre</option>
+						<option value="FETA" th:selected="${recipe?.cheeseType == 'FETA'}">Feta</option>
+						<option value="LABNEH" th:selected="${recipe?.cheeseType == 'LABNEH'}">Labneh</option>
+						<option value="MANCHEGO" th:selected="${recipe?.cheeseType == 'MANCHEGO'}">Manchego</option>
 					</select>
 				</div>
 				<div class="mb-3">
 					<label for="hardness">Hardness:</label> <select id="hardness"
 						name="hardness" class="form-select">
-						<option value="HARD">Hard</option>
-						<option value="SEMISOFT">Semi-soft</option>
-						<option value="SOFT">Soft</option>
+						<option value="HARD" th:selected="${recipe?.hardness == 'HARD'}">Hard</option>
+						<option value="SEMISOFT" th:selected="${recipe?.hardness == 'SEMISOFT'}">Semi-soft</option>
+						<option value="SOFT" th:selected="${recipe?.hardness == 'SOFT'}">Soft</option>
 					</select> <label for="milk-type">Milk Type:</label> <select id="milk-type"
 						name="milkType" class="form-select">
-						<option value="COW">Cow Milk</option>
-						<option value="GOAT">Goat Milk</option>
-						<option value="SHEEP">Sheep Milk</option>
+						<option value="COW" th:selected="${recipe?.milkType == 'COW'}">Cow Milk</option>
+						<option value="GOAT" th:selected="${recipe?.milkType == 'GOAT'}">Goat Milk</option>
+						<option value="SHEEP" th:selected="${recipe?.milkType == 'SHEEP'}">Sheep Milk</option>
 					</select>
 				</div>
 				<div class="mb-3">
 					<label for="ingredients">Ingredients:</label>
 					<textarea class="form-control" id="ingredients" name="ingredients"
-						rows="10" cols="50">
+						rows="10" cols="50" th:text="${recipe?.ingredients}">
 </textarea>
 				</div>
 				<div class="mb-3">
 					<label for="warm-the-milk">Warm the Milk:</label>
 					<textarea class="form-control" id="warm-the-milk"
-						name="warmTheMilk" rows="10" cols="50">
+						name="warmTheMilk" rows="10" cols="50" th:text="${recipe?.warmTheMilk}">
 </textarea>
 				</div>
 				<div class="mb-3">
 					<label for="culture-coagulate">Culture the Milk and
 						Coagulate:</label>
 					<textarea class="form-control" id="culture-coagulate"
-						name="cultureAndCoagulate" rows="10" cols="50">
+						name="cultureAndCoagulate" rows="10" cols="50" th:text="${recipe?.cultureAndCoagulate}">
 </textarea>
 				</div>
 				<div class="mb-3">
 					<label for="ladle-curd">Ladle the Curd:</label>
 					<textarea class="form-control" id="ladle-curd" name="ladleTheCurd"
-						rows="10" cols="50">
+						rows="10" cols="50" th:text="${recipe?.ladleTheCurd}">
 </textarea>
 				</div>
 				<div class="mb-3">
 					<label for="drain-curd">Drain the Curd:</label>
 					<textarea class="form-control" id="drain-curd" name="drainTheCurd"
-						rows="10" cols="50">
+						rows="10" cols="50" th:text="${recipe?.drainTheCurd}">
 </textarea>
 				</div>
 				<div class="mb-3">
 					<label for="target-flavor-texture">Target Flavor and
 						Texture:</label>
 					<textarea class="form-control" id="target-flavor-texture"
-						name="targetFlavorAndTexture" rows="10" cols="50">
+						name="targetFlavorAndTexture" rows="10" cols="50" th:text="${recipe?.targetFlavorAndTexture}">
 </textarea>
 				</div>
 				<div class="mb-3">
 					<label for="storage">Storage:</label>
 					<textarea class="form-control" id="storage" name="storage"
-						rows="10" cols="50">
+						rows="10" cols="50" th:text="${recipe?.description}">
 </textarea>
 				</div>
 				<div class="mb-3">
 					<label for="notes">Additional Notes:</label>
 					<textarea class="form-control" id="notes" name="notes" rows="10"
-						cols="50">
+						cols="50" th:text="${recipe?.notes}">
 </textarea>
 				</div>
 				<input type="submit" value="Submit" />

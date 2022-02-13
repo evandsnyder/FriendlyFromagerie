@@ -19,8 +19,7 @@ public class UserService {
 	}
 
 	public User register(RegisterRequest registerRequest){
-		// convert
-		repository.getUsers().save(new User(registerRequest));
+		repository.getUsers().save(new User(registerRequest, repository.getRoles().findById(2).get()));
 		return null;
 	}
 }

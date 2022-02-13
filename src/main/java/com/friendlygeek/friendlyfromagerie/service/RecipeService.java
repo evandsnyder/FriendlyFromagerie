@@ -30,6 +30,10 @@ public class RecipeService {
 				&& !recipe.getStorage().isEmpty();
 	}
 
+	public CheeseRecipe saveRecipe(CheeseRecipe recipe){
+		return repository.getRecipes().save(recipe);
+	}
+
 	public Iterable<CheeseRecipe> getAllRecipes(){
 		return repository.getRecipes().findAll();
 	}

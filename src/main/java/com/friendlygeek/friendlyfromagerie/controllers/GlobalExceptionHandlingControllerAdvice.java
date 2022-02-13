@@ -23,7 +23,8 @@ public class GlobalExceptionHandlingControllerAdvice {
 
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	@ExceptionHandler({NoHandlerFoundException.class, ResourceNotFoundException.class})
-	public ModelAndView notFoundError(){
+	public ModelAndView notFoundError(Exception e){
+		e.printStackTrace();
 		return new ModelAndView("404");
 	}
 }

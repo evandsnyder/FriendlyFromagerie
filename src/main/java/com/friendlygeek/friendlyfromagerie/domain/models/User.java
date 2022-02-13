@@ -3,6 +3,8 @@ package com.friendlygeek.friendlyfromagerie.domain.models;
 import com.friendlygeek.friendlyfromagerie.domain.dtos.RegisterRequest;
 
 import javax.persistence.*;
+
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -26,7 +28,7 @@ public class User {
 
 	public User(){}
 
-	public User(RegisterRequest registration){
+	public User(RegisterRequest registration, Role role){
 		username = registration.getUsername();
 		firstName = registration.getFirstName();
 		lastName = registration.getLastName();
@@ -34,6 +36,8 @@ public class User {
 		email = registration.getEmail();
 		password = registration.getPassword();
 		isActive = true;
+		roles = new HashSet<>();
+		roles.add(role);
 
 	}
 
@@ -102,6 +106,9 @@ public class User {
 	}
 
 	public Set<Role> getRoles() {
+		if(roles == null) {
+			roles = new HashSet<>();
+		}
 		return roles;
 	}
 

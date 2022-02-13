@@ -3,42 +3,69 @@ package com.friendlygeek.friendlyfromagerie.domain.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name="recipes")
+@Table(name = "recipes")
 public class CheeseRecipe {
 	@Id
-	@GeneratedValue(strategy= GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	private boolean isPublic;
+	private String recipeName;
+	
+	@Column(length = 1024)
+	private String description;
 	private String cheeseType;
 	private String hardness;
 	private String milkType;
+
+	@Column(length = 1024)
 	private String ingredients;
+
+	@Column(length = 1024)
 	private String warmTheMilk;
+
+	@Column(length = 1024)
 	private String cultureAndCoagulate;
+
+	@Column(length = 1024)
 	private String ladleTheCurd;
+
+	@Column(length = 1024)
 	private String drainTheCurd;
+
+	@Column(length = 1024)
 	private String targetFlavorAndTexture;
+
+	@Column(length = 1024)
 	private String storage;
+
+	@Column(length = 1024)
 	private String notes;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="createdBy", referencedColumnName = "user_id")
+	@JoinColumn(name = "createdBy", referencedColumnName = "user_id")
 	private User createdBy;
 
 	public Integer getId() {
 		return id;
 	}
 
+	public String getRecipeName() {
+		return recipeName;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setRecipeName(String recipeName) {
+		this.recipeName = recipeName;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public boolean isPublic() {
-		return isPublic;
-	}
-
-	public void setPublic(boolean aPublic) {
-		isPublic = aPublic;
 	}
 
 	public String getCheeseType() {
