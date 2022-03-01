@@ -16,8 +16,8 @@ public class EndpointBuilderFactory {
     public static final String RECIPE = "/recipes";
 
     @Autowired
-    public EndpointBuilderFactory(@Value("${API_SERVER}") String apiAddress, @Value("${API_PORT}") String apiPort){
-        baseAddress = apiAddress + ":" + apiPort;
+    public EndpointBuilderFactory(@Value("${API_SERVER}") String apiAddress){
+        baseAddress = apiAddress;
     }
 
     public String getSubmitLoginEndpoint(LoginRequest request){
