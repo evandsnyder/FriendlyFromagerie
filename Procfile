@@ -1,1 +1,1 @@
-web: java -Dapi.port=$API_PORT -Dapi.address=$API_ADDRESS -jar $PATH_TO_JAR
+web: java -Dapi.port=$API_PORT -Dapi.address=$API_ADDRESS -cp target/classes/:target/dependency/* $PATH_TO_JAR
