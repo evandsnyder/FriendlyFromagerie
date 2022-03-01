@@ -16,7 +16,7 @@ public class EndpointBuilderFactory {
     public static final String RECIPE = "/recipes";
 
     @Autowired
-    public EndpointBuilderFactory(@Value("${api.address}") String apiAddress, @Value("${api.port}") String apiPort){
+    public EndpointBuilderFactory(@Value("${API_SERVER}") String apiAddress, @Value("${API_PORT}") String apiPort){
         baseAddress = apiAddress + ":" + apiPort;
     }
 
