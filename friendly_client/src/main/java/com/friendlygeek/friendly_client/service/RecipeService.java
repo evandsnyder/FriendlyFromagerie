@@ -1,37 +1,22 @@
 package com.friendlygeek.friendly_client.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.friendlygeek.friendly_client.Endpoints;
 import com.friendlygeek.friendly_client.application.ResourceNotFoundException;
 import com.friendlygeek.friendly_client.dto.RecipeWrapper;
 import com.friendlygeek.friendly_client.model.Recipe;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.hateoas.CollectionModel;
-import org.springframework.hateoas.EntityModel;
-import org.springframework.hateoas.MediaTypes;
-import org.springframework.hateoas.client.Traverson;
-import org.springframework.hateoas.server.core.TypeReferences;
 import org.springframework.http.*;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
-import org.springframework.http.codec.json.Jackson2JsonDecoder;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
-import javax.annotation.Resource;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
-
-import static org.springframework.hateoas.client.Hop.rel;
 
 @Service
 public class RecipeService {
@@ -81,7 +66,7 @@ public class RecipeService {
         if (recipe.getId() == null) {
             logger.info("Saving new recipe");
             RestTemplate request = new RestTemplate();
-            ResponseEntity<Recipe> response = request.postForEntity(Endpoints.RECIPE_ENDPOINT, recipe, Recipe.class);
+            ResponseEntity<Recipe> response = request.postForEntity(endpointFactory.getRecipeEndpoint(), recipe, Recipe.class);
 
             // The post request doesn't return the entire new entity (meaning we have no id)
             // but it does return the address of the new resource which does have the Id on it
@@ -94,7 +79,7 @@ public class RecipeService {
         // PATCH requests. Given that PATCH was officially adopted back in 2010 (https://datatracker.ietf.org/doc/html/rfc5789),
         // it seems silly that now, over a decade later, it's not inherently supported. Instead, we have to use a separate
         // client to actually gain access to the Patch request
-        (new RestTemplate(new HttpComponentsClientHttpRequestFactory())).patchForObject(Endpoints.RECIPE_ENDPOINT + "/" + recipe.getId(), recipe, Recipe.class);
+        (new RestTemplate(new HttpComponentsClientHttpRequestFactory())).patchForObject(endpointFactory.getRecipeEndpoint() + "/" + recipe.getId(), recipe, Recipe.class);
         return recipe.getId();
     }
 
@@ -102,7 +87,7 @@ public class RecipeService {
         Recipe recipe = null;
 
         try {
-            recipe = (new RestTemplate()).getForObject(Endpoints.RECIPE_ENDPOINT + "/" + id, Recipe.class);
+            recipe = (new RestTemplate()).getForObject(endpointFactory.getRecipeEndpoint() + "/" + id, Recipe.class);
             recipe.setId(extractId(recipe));
         } catch (HttpClientErrorException ex) {
             if (ex.getStatusCode() != HttpStatus.NOT_FOUND) {

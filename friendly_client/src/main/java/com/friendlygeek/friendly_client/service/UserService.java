@@ -1,6 +1,5 @@
 package com.friendlygeek.friendly_client.service;
 
-import com.friendlygeek.friendly_client.Endpoints;
 import com.friendlygeek.friendly_client.dto.LoginRequest;
 import com.friendlygeek.friendly_client.dto.RegisterRequest;
 import com.friendlygeek.friendly_client.model.User;
@@ -40,6 +39,6 @@ public class UserService {
     }
 
     public User register(RegisterRequest registrationRequest){
-        return (new RestTemplate()).postForObject(Endpoints.USERS_ENDPOINT, registrationRequest, User.class);
+        return (new RestTemplate()).postForObject(endpointFactory.getUserEndpoint(), registrationRequest, User.class);
     }
 }
