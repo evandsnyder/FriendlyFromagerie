@@ -1,1 +1,1 @@
-web: java -Dapi.port=$API_PORT -Dapi.address=$API_ADDRESS e-jar $PATH_TO_JAR
+web: java -Dapi.port=$API_PORT -Dapi.address=$API_ADDRESS -jar $PATH_TO_JAR
