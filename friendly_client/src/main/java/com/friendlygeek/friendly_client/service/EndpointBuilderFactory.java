@@ -21,7 +21,7 @@ public class EndpointBuilderFactory {
     }
 
     public String getSubmitLoginEndpoint(LoginRequest request){
-        return String.format("%s%s/findFirstByUsername?username=%s", getRecipeEndpoint(), SEARCH, request.getUsername());
+        return String.format("%s%s/findFirstByUsername?username=%s", getUserEndpoint(), SEARCH, request.getUsername());
     }
 
     public String getFindAllRecipes(){
