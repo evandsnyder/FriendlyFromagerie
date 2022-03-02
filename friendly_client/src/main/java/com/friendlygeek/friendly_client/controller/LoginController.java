@@ -35,12 +35,16 @@ public class LoginController extends BaseController {
             return new ModelAndView("error");
         }
 
+        logger.info("Attempting login");
         User user = userService.authenticate(loginRequest);
 
         if (user != null) {
+            logger.info("Login Successful");
             session.setAttribute("user", user);
             return new ModelAndView("redirect:/dashboard");
         }
+
+        logger.info("Login Failed");
         model.addAttribute("error", "Invalid Credentials");
 
         return new ModelAndView("login");
