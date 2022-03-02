@@ -16,7 +16,7 @@ public class EndpointBuilderFactory {
     public static final String RECIPE = "/recipes";
 
     @Autowired
-    public EndpointBuilderFactory(@Value("${API_SERVER}") String apiAddress){
+    public EndpointBuilderFactory(@Value("${API_ADDRESS}") String apiAddress){
         baseAddress = apiAddress;
     }
 
