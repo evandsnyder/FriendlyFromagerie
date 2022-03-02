@@ -35,7 +35,7 @@ public class LoginController extends BaseController {
             return new ModelAndView("error");
         }
 
-        logger.info("Attempting login");
+        logger.info("Attempting login for {}", loginRequest.getUsername());
         User user = userService.authenticate(loginRequest);
 
         if (user != null) {
